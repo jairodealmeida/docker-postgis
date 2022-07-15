@@ -316,3 +316,9 @@ COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
 COPY ./update-postgis.sh /usr/local/bin
 RUN cat /_pgis_full_version.txt
 
+COPY pt_BR /usr/share/i18n/locales/pt_BR
+
+RUN localedef -i de_DE -c -f ISO-8859-1 -A /usr/share/i18n/locales/pt_BR pt_BR.ISO-8859-1
+ENV LANG pt_BR.ISO-8859-1
+RUN export LC_ALL=pt_BR
+RUN echo LC_ALL=pt_BR >> /etc/environment
